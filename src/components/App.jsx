@@ -1,9 +1,11 @@
 import { ErrorMessage, FastField, Form, Formik } from "formik";
 import * as yup from "yup";
+import ErrorHandler from "./ErrorHandler";
 const initialValues = {
   name: "",
   email: "",
   password: "",
+  bio: ""
 };
 const onSubmit = (values) => {
   console.log(values);
@@ -34,19 +36,17 @@ const App = () => {
         <Form className="registerForm">
           <label htmlFor="name">Full Name:</label>
           <FastField type="text" name="name" id="name" />
-          <ErrorMessage name="name">
-            {(value) => <p className="errorMsg">{value}</p>}
-          </ErrorMessage>
+          <ErrorMessage name="name" component={ErrorHandler}/>
           <label htmlFor="email">Email:</label>
           <FastField type="text" name="email" id="email" />
-          <ErrorMessage name="email">
-            {(value) => <p className="errorMsg">{value}</p>}
-          </ErrorMessage>
+          <ErrorMessage name="email" component={ErrorHandler}/>
           <label htmlFor="password">Password:</label>
           <FastField type="text" name="password" id="password" />
           <ErrorMessage name="password">
-            {(value)=><p className="errorMsg">{value}</p>}
+            {(props)=><p className="errorMsg">{props}</p>}
           </ErrorMessage>
+          <label htmlFor="bio">bio:</label>
+          <FastField type="text" name="bio" id="bio" as="textarea" />
           <button type="submit">Submit</button>
         </Form>
       </Formik>

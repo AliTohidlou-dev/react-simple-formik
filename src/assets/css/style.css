@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
@@ -10,55 +11,90 @@ body {
   display: grid;
   place-content: center;
   background: linear-gradient(
-    45deg,
+    135deg,
     rgba(255, 155, 23, 0.2),
     rgba(150, 230, 100, 0.3),
     rgba(100, 255, 255, 0.7)
   );
 }
 
+/* فرم ثبت‌نام */
 .register {
-  width: 450px;
-  height: auto;
-  box-shadow: 0 0 10px 2px black;
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.19);
+  width: 100%;
+  min-width: 450px;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  border-radius: 12px;
+  overflow: hidden;
+  backdrop-filter: blur(6px);
 }
+
 .register h1 {
   text-align: center;
-  padding-top: 10px;
+  padding: 20px 0;
+  font-size: 1.8rem;
+  color: #fff;
 }
+
+/* فرم داخلی */
 .registerForm {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  padding: 10px;
+  padding: 20px 30px 30px;
 }
-.registerForm input {
-  outline: none;
-  height: 30px;
-  border-radius: 8px;
-  padding-inline-start: 10px;
-  margin: auto 100px;
-}
+
 .registerForm label {
-  padding-inline-start: 10px;
-  margin: auto 100px;
-  font-size: 1.2rem;
+  font-size: 1rem;
+  color: #fff;
 }
-.registerForm button {
-  margin: auto 100px;
-  margin-top: 10px;
-  padding: 5px;
+
+.registerForm input{
+    width: 100%;
+  padding: 10px;
   border-radius: 8px;
+  border: none;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+
+}
+.registerForm textarea {
+  max-width: 400px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.9);
+  font-size: 1rem;
+}
+
+.registerForm button {
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
   background: linear-gradient(
     45deg,
-    rgba(255, 155, 23, 0.2),
-    rgba(150, 230, 100, 0.3),
-    rgba(100, 255, 255, 0.7)
+    rgba(255, 155, 23, 0.6),
+    rgba(150, 230, 100, 0.6),
+    rgba(100, 255, 255, 0.9)
   );
+  color: #000;
+  font-weight: bold;
+  transition: all 0.3s ease;
 }
-.errorMsg{
+
+.registerForm button:hover {
+  opacity: 0.8;
+  transform: scale(1.02);
+}
+
+/* پیام خطا */
+.errorMsg {
   color: red;
+  font-size: 0.95rem;
+  margin-top: 5px;
   text-align: center;
 }
