@@ -49,15 +49,14 @@ body {
   color: #fff;
 }
 
-.registerForm input{
-    width: 100%;
+.registerForm input {
+  width: 100%;
   padding: 10px;
   border-radius: 8px;
   border: none;
   outline: none;
   background-color: rgba(255, 255, 255, 0.9);
   font-size: 1rem;
-
 }
 .registerForm textarea {
   max-width: 400px;
@@ -68,7 +67,23 @@ body {
   background-color: rgba(255, 255, 255, 0.9);
   font-size: 1rem;
 }
+.registerForm .inputGroup {
+  max-width: 400px;
+  display: flex;
+  gap: 10px;
+}
+.inputGroup div{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.registerForm select{
+    padding: 10px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
 
+}
 .registerForm button {
   margin-top: 20px;
   padding: 10px;

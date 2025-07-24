@@ -1,17 +1,29 @@
-import { ErrorMessage, FastField, Form, Formik } from "formik";
+import { Form, Formik } from "formik";
 import * as yup from "yup";
-import ErrorHandler from "./ErrorHandler";
+import FormikController from "../elements/FormikController";
 const initialValues = {
   name: "",
   email: "",
   password: "",
   bio: "",
+  address: {
+    city: "",
+    postalCode: "",
+  },
+  gender: "",
 };
-const onSubmit = (values,submitProps) => {
-  console.log(submitProps);
-  setTimeout(()=>{
+const genderOptions = [
+  { id: "1", value: "male" },
+  { id: "2", value: "female" },
+];
+const onSubmit = (values, submitProps) => {
+  console.log(values);
+
+  setTimeout(() => {
+    console.log(submitProps);
     submitProps.setSubmitting(false);
-  },10000)
+    submitProps.resetForm();
+  }, 5000);
 };
 const validate = yup.object({
   name: yup
@@ -29,6 +41,13 @@ const validate = yup.object({
   bio: yup
     .string()
     .matches(/^[\u0600-\u06FF\s0-9A-Za-z]+$/, "you can only use word and num"),
+  address: yup.object({
+    city: yup.string().required("required"),
+    postalCode: yup.number().required("required"),
+  }),
+  gender:yup
+  .string()
+  .required('required')
 });
 const App = () => {
   return (
@@ -41,24 +60,66 @@ const App = () => {
         validateOnMount
       >
         {(formik) => {
-          console.log(formik);
           return (
             <Form className="registerForm">
-              <label htmlFor="name">Full Name:</label>
-              <FastField type="text" name="name" id="name" />
-              <ErrorMessage name="name" component={ErrorHandler} />
-              <label htmlFor="email">Email:</label>
-              <FastField type="text" name="email" id="email" />
-              <ErrorMessage name="email" component={ErrorHandler} />
-              <label htmlFor="password">Password:</label>
-              <FastField type="password" name="password" id="password" />
-              <ErrorMessage name="password">
-                {(props) => <p className="errorMsg">{props}</p>}
-              </ErrorMessage>
-              <label htmlFor="bio">bio:</label>
-              <FastField type="text" name="bio" id="bio" as="textarea" />
-              <ErrorMessage name="bio" component={ErrorHandler} />
-              <button type="submit" disabled={(!(formik.dirty && formik.isValid)||formik.isSubmitting)?true:false}>Submit</button>
+              <FormikController
+                element="input"
+                type="text"
+                name="name"
+                label="Full Name:"
+              />
+              <FormikController
+                element="input"
+                type="email"
+                name="email"
+                label="Email:"
+              />
+              <FormikController
+                element="input"
+                type="password"
+                name="password"
+                label="Password:"
+              />
+              <FormikController
+                element="textArea"
+                type="text"
+                name="bio"
+                label="Bio:"
+              />
+              <div className="inputGroup">
+                <div>
+                  <FormikController
+                    element="input"
+                    type="text"
+                    name="address.city"
+                    label="City:"
+                  />
+                </div>
+                <div>
+                  <FormikController
+                    element="input"
+                    type="number"
+                    name="address.postalCode"
+                    label="PostalCode:"
+                  />
+                </div>
+              </div>
+              <FormikController
+                element="select"
+                name="gender"
+                label="Gender:"
+                values={genderOptions}
+              />
+              <button
+                type="submit"
+                disabled={
+                  !(formik.dirty && formik.isValid) || formik.isSubmitting
+                    ? true
+                    : false
+                }
+              >
+                Submit
+              </button>
             </Form>
           );
         }}
